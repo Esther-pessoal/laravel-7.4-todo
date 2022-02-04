@@ -34,7 +34,8 @@ class TodoController extends Controller
     {
         $user = auth()->user();
 
-        $todos = $this->repository->findWhere(['user_id' => $user->id]);
+        $todos = $this->repository->findWhere(['user_id' => $user->id])
+                                  ->findWhere(['is_complete' => 'true']);
 
         return view('dashboard', compact('user', 'todos'));
     }
